@@ -1,2 +1,2 @@
-mkdir raw
 wget -nc -O assessor.csv https://data.sfgov.org/api/views/wv5m-vpq2/rows.csv?accessType=DOWNLOAD
+wget -nc -O incidents.csv https://data.sfgov.org/api/views/tmnf-yvry/rows.csv?accessType=DOWNLOAD&bom=true&format=true
