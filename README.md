@@ -1,6 +1,12 @@
 Final Project
 ==============================
 
+Instructions
+------------
+Upper camel case for column name
+Everything on the data frame should be lower case
+
+
 Summary
 ------------
 
