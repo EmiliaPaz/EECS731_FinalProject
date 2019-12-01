@@ -38,4 +38,4 @@ df.dtypes
 df=df.sort_values(by='Year',ascending=False)
 df=df.reset_index(drop=True)
 df=df.apply(lambda x: x.astype(str).str.lower())
-df.to_csv(r'C:/Users/Sandy/Documents/Data Science/Eviction.csv', index = None, header=True)
+df.to_csv('../../data/processed/Eviction.csv', index = None, header=True)
