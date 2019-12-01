@@ -86,3 +86,9 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+# no uploads of csv
+*.csv
+
+# for alex (sorry)
+.venv
