@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import re
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
 
@@ -11,21 +12,26 @@ class __SupervisorDistricts:
   def __gen_shapes(self):
     df = pd.read_csv("../../data/raw/Current_Supervisor_Districts.csv").sort_values(by="supervisor")
     shapes = []
-    for row in df.values:
-      coords = row[1][len("MULTIPOLYGON ((("):]
-      coords = coords[:len(coords)-len(")))")]
-      coords_split = coords.split(", ")
-      list_of_coords = []
-      for coord in coords_split:
-        coord = coord.split(" ")
-        try:
+    # test_df = [["Test1", "MULTIPOLYGON (((1 1, 1 2, 2 2, 2 1)))"],
+    #            ["Test2", "MULTIPOLYGON (((1 1, 1 2, 2 2, 2 1)), ((-1 -1, -1 -2, -2 -2, -2 -1)))"]]
+    # for i, row in enumerate(test_df):
+    for i, row in enumerate(df.values):
+      coords_str = re.compile(r"MULTIPOLYGON \(\(\((.+)\)\)\)").match(row[1]).group(1)
+      coords_list = []
+      if coords_str.find(")") != -1:
+        coords_list = re.compile(r"(.+)\)\), \(\((.+)").match(coords_str).groups()
+      else:
+        coords_list = [coords_str]
+      for coords in coords_list:
+        coords_split = coords.split(", ")
+        list_of_coords = []
+        for coord in coords_split:
+          coord = coord.split(" ")
           list_of_coords.append((float(coord[0]), float(coord[1])))
-        except Exception as e: # TODO This should be changed to allow for multiple polygons
-          if coord[0][0] == "(":
-            list_of_coords.append((float(coord[0][len("(("):]), float(coord[1])))
-          elif coord[1][len(coord[1])-1] == ")":
-            list_of_coords.append((float(coord[0]), float(coord[1][:len(coord[1])-len("))")])))
-      shapes.append((row[0], Polygon(list_of_coords)))
+        if len(shapes) == i:
+          shapes.append((row[0], Polygon(list_of_coords)))
+        else:
+          shapes[i] = (shapes[i][0], shapes[i][1].union(Polygon(list_of_coords)))
     return shapes
 
   def get_district(self, lat, lon):
