@@ -1,18 +1,20 @@
 Final Project
 ==============================
 
-Instructions
-------------
-Upper camel case for column name
-Everything on the data frame should be lower case
-
+* Harrison Luo
+* Emilia Paz
+* Trenton Potter
+* Justin Roderman
+* Sandy Rech
+* Alex Shadley
 
 Summary
 ------------
 
-### Steps:
-
-### Conclusions:
+Where should we buy an airbnb for maximum profit?
+1. How do external factors affect property value?
+2. How do property values change over time?
+3. How does this affect Airbnb listings?
 
 
 Project Organization
@@ -25,6 +27,10 @@ Project Organization
     │
     ├── notebooks          <- Jupyter notebooks.
     │   ├── cleaning       <- Notebooks for cleaning the  raw datasets
+    │   
+    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
+    │   ├── figures        <- Generated graphics and figures to be used in reporting
+    │   ├── maps           <- HTML for google maps
     │   
     ├── src                <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
